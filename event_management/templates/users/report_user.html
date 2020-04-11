@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}report users{% endblock %}
+
+{% block content %}
+  <h2>Report {{ user.first_name}} {{user.last_name}}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">report</button>
+  </form>
+{% endblock %}

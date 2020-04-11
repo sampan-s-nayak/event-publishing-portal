@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+
+  <p><a href="user/create_event">User</a> </p>
+  <p><a href="user/dashboard">Dashboard</a></p>
+  <p><a href="superuser/home">Superuser</a></p>
+  <p><a href="{% url 'logout' %}">logout</a></p>
+
+  {% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+  <a href="{% url 'signup' %}">signup</a>
+{% endif %}
+<form action="" method="GET">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{% for eachevent in eventlist %}
+    <div class="card mb-3">
+		<div class="card-body">
+			<p class="lead">{{eachevent.event_name}}</p>
+			<p class="lead">{{eachevent.event_start_date}} to {{eachevent.event_end_date}}</p>
+			<a href="{%url 'event:eventdetails' eachevent.id%}" class="btn btn-dark btn-sm" >Get details</a>
+		</div>
+	</div>
+{% endfor %}		
+{% endblock %}
+
+                              <!-- display list of events here -->

@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+{%block content%}
+	<style>
+		.card{
+			margin: 5px;
+		}
+		.btn{
+			margin:5px;
+			display: inline-block;
+		}
+		
+		
+	</style>
+        {%if events%}
+        {%for event in events%}
+        <div class="card col-4">
+        	<p>Event id : {{event.id}}</p>
+        	<p>Event Name : {{event.event_name}}</p>
+        	<div id="buttons">
+        	<a class="btn btn-primary " href="{%url 'event:eventdetails' event.id %}" >Details</a>
+            <a class="btn btn-primary " href="{%url 'moderator:action' event.id 'accept'%}" >Accept</a>
+            <a class="btn btn-primary " href="{%url 'moderator:action' event.id 'reject'%}" >reject</a></div>
+        {%endfor%} 
+        {%else%}
+        <p>There are no events to diplay</p>
+        {%endif%} 
+        </div.  
+{%endblock%}

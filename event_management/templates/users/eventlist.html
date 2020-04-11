@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{%block content%}
+    {%if createdevents%}
+        {%for event in createdevents%}
+            {{event.event_name}}
+            <a class="btn btn-primary btn-sm" href="{%url 'event:eventdetails' event.id%}" >See details</a>
+            <a class="btn btn-primary btn-sm" href="{%url 'users:getregistrations' event.id%}" >See all registrations</a>
+            <a class="btn btn-primary btn-sm" href="{%url 'event:changedetails' event.id%}" >Change details</a>
+        {%endfor%}
+    {%endif%}
+    {%if joinedevents%}
+        {%for event in joinedevents%}
+            <a class="btn btn-primary btn-sm" href="{%url 'event:eventdetails' event.id%}" >See details</a>
+        {%endfor%}
+    {%endif%}
+    {%if not createdevents and not joinedevents%}
+        <p>No events to display here</p>
+    {%endif%}
+		
+{%endblock%}

@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{%block content%}
+	<h3>{{eventobj.id}}</h3>
+	<h4>Event details</h4>
+	<hr/>
+	<p>{{event_obj.event_description}}</p>
+	<p>Start Date:{{eventobj.event_start_date}}</p>
+	<p>End Date:{{eventobj.event_end_date}}</p>
+	<p>Maximum participants the event takes:{{eventobj.max_participants}}</p>
+	<p>Number of registered participants:{{eventobj.num_participants}}</p>
+	{%if eventobj.num_participants == eventobj.max_participants%}
+	<p>Since the event already has been registered fully, any further registrations will be put in a waiting queue</p>
+	<p>If any current registrations are deleted, then the waiting registrations will be considered</p>
+	{% endif %}
+	{%if userreg%}
+		<a class="btn btn-primary btn-sm" href="{%url 'event:eventdropout' eventobj.id%}" >Dropout of event</a>
+	{%else%}
+		<a class="btn btn-primary btn-sm" href="{%url 'event:eventregister' eventobj.id%}" >Join event</a>
+	{%endif%}
+	
+{%endblock%}
+
+Password@4

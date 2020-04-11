@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{%block content%}
+        <h3>Current event details</h3>
+        <p>Name:{{event.event.event_name}}</p>
+        <p>Description:{{event.event.event_description}}</p>
+        <p>Start Date:{{event.event.event_start_date}}</p>
+        <p>End date:{{event.event.event_end_date}}</p>
+        <p>Maximum participants:{{event.event.max_participants}}</p>
+        <p>Maximum waiting list size:{{event.event.max_waiting_list_size}}</p>
+        <hr/>
+        <h3>Suggested changes</h3>
+        <p>Name:{{event.newname}}</p>
+        <p>Description:{{event.newdescription}}</p>
+        <p>Start Date:{{event.newstart_date}}</p>
+        <p>End date{{event.newend_date}}</p>
+        <p>Maximum participants:{{event.newmax_participants}}</p>
+        <p>Maximum waiting list size:{{event.newmax_waiting_list_size}}</p>
+
+        <a class="btn btn-primary btn-sm" href="{%url 'moderator:changeevent' event.event.id 'accept'%}" >Accept changes</a>
+        <a class="btn btn-primary btn-sm" href="{%url 'moderator:changeevent' event.event.id 'reject'%}" >Reject changes</a>
+{%endblock%}

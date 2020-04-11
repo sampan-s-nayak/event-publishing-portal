@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <title> Home </title>
+    <style>
+        #nav_bar
+        {
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            
+        }
+        ul
+		{
+			color: white;
+			list-style-type: none;
+			padding: 0px;
+			background-color: #333333;
+			overflow: hidden;
+            border-radius: 10px;
+		}
+		li
+        {
+            border-radius: 5px;
+            margin-left:3px;
+            border: 3px solid #333333;
+            float: left;
+        }
+		li a
+		{
+			display: block;
+			text-decoration: none;
+			padding: 10px;
+			text-align: center;	
+			color: white;
+		}
+		li a:hover
+		{
+            border-radius: 5px;
+            background-color: #808080;
+		}
+        #add
+        {
+            border: 3px solid green;
+        }
+		
+		#log_out
+		{
+			float: right;
+		}
+   
+        #form
+        {
+            margin-left: 26%;
+        }
+        input
+        {
+            margin-top: 2px;
+            margin-bottom: 3px;
+            width: 40%;
+            border-radius: 5px;
+            border: solid 1.5px #D3D3D3;
+            padding: 9px;
+        }
+        input[type=text]:focus,input[type=number]:focus 
+		{
+ 			 box-shadow: 0 0 5pt 2pt #D3D3D3;
+  			 outline-width: 0px;
+		}
+        #button
+        {
+            font-size: 100%;
+            font-weight: bold;
+            margin-top: 1%;
+            margin-left: 30%;
+            width: 10%;
+        }
+        #button:hover
+		{
+			background-color:white;
+			font-style: none;
+			font-weight: bold;
+			font-size: 110%;
+			color: black;
+
+		}
+    </style>
+    
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+        
+            {% if request.user.is_superuser %}
+        <div id=nav_bar>
+            <ul>
+               <li id=add> <a href="home"> <b> Add moderator </b> </a> </li>
+               <li> <a href="display"> <b> Moderators </b> </a> </li>
+               <li id="log_out";> <a href="{% url 'logout' %}"> <b>Log Out {{user.username}} </b> </a> </li>
+               
+           </ul>
+       </div>
+       
+        <div id=form>
+        <form action = 'add_mod' method = "POST">  
+            {% csrf_token %}
+            <label> Username: </label> <br> 
+            <input type = "text" name  = "username" /><br>
+           
+            <label> Password: </label> <br> 
+            <input type = "password" name  = "password" /><br>  
+           
+            <label> Confirm Password: </label> <br> 
+            <input type = "password" name  = "cpassword" /><br>
+           
+            <label>  First Name: </label> <br> 
+            <input type = "text" name  = "fname" /><br>
+           
+            <label>  Last Name: </label> <br> 
+            <input type = "text" name  = "lname" /><br>
+           
+            <label> Email: </label> <br> 
+            <input type = "text" name  = "email" /><br>
+              
+            <input id=button type="submit">  
+        </form>
+        {% for message in messages %}
+            <h1>{{message}}</h1>
+        {% endfor %}  
+        </div>  
+    </body>
+    
+
+    {% else %}
+        <h1> You aren't a super user!! </h1>
+    {% endif %}
+    {% else %}
+        <h1> Authentication Failed, Get lost!! </h1>
+    {% endif %}    
+</html>

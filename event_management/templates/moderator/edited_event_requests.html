@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+{%block content%}
+        {%if events%}
+        {%for event in events%}
+            <a class="btn btn-primary btn-sm" href="{%url 'moderator:showchanges' event.event.id%}" >{{event.event.event_name}}</a>
+        {%endfor%} 
+        {%else%}
+        <p>There are no events to diplay</p>
+        {%endif%}   
+{%endblock%}

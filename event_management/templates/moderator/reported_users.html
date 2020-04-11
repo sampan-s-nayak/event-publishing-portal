@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}view reported users{% endblock %}
+
+{% block content %}
+<div id="accordion">
+{% for complaint in complaints  %}
+    <div class="card">
+      <div class="card-header" id="heading{{complaint.id}}">
+        <div class="mb-0">
+          <span>{{complaint.user.username}}</span>
+          <span style="margin-left:30%;">reported by {{complaint.reported_by.username}}</span>
+          <button class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#collapse{{complaint.id}}" aria-expanded="false" aria-controls="collapse{{complaint.id}}" style="float:right;">
+            View Details
+          </button>
+        </div>
+      </div>
+  
+      <div id="collapse{{complaint.id}}" class="collapse" aria-labelledby="heading{{complaint.id}}" data-parent="#accordion">
+        <div class="card-body">
+          <p>{{complaint.reason}}</p>
+          <a href="{% url 'blacklist' complaint.user.id duration %}" class="btn btn-danger btn-sm" > blacklist</a>
+        </div>
+      </div>
+{% endfor %}
+</div>
+{% endblock %}

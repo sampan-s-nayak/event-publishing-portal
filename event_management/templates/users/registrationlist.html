@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%block content%}
+    {%if registrationlist%}
+        <ol>
+        {%for registration in registrationlist%}
+        <li>
+            <div>
+                {{registration.participant.username}}
+                <a class="btn btn-primary btn-sm" href="{%url 'users:report_user' registration.participant.id%}" >Report user</a>
+            </div>
+        </li>
+        {%endfor%}
+        </ol>
+    {%else%}
+        <p>No participants yet for the event</p>
+    {%endif%}
+		
+{%endblock%}
