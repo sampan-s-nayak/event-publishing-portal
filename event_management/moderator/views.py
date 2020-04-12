@@ -1,22 +1,29 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from .models import BlackList
 from user.models import ReportedUsers
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from event.models import EditEvent,Event
 
 BLACKLIST_DURATION = 7
-
-# Create your views here.
-def blacklist(request,id,duration):
-    # TODO authentication to be added
+    
+@login_required
+def blacklist_user(request,id,duration):
+    user = request.user
+    if(not user.is_staff or not user.is_superuser):
+        return HttpResponse("you are not authorized to view this page") 
 
     user = User.objects.get(id=id)
     if(not BlackList.objects.filter(user=user).exists()):
         bl = BlackList.objects.create(user=user,duration=duration)
-    return redirect('view_reported_users')
+    return redirect('moderator:view_reported_users')
 
+@login_required
 def view_reported_users(request):
-    # TODO authentication to be added
+    user = request.user
+    if(not user.is_staff or not user.is_superuser):
+        return HttpResponse("you are not authorized to view this page") 
 
     template_path = 'moderator/reported_users.html'
     reported_users = ReportedUsers.objects.all()
@@ -27,6 +34,7 @@ def view_reported_users(request):
     }
     return render(request, template_path,context)
 
+@login_required
 def editedeventrequests(request):
     events = []
     for editevent in EditEvent.objects.all():
@@ -34,14 +42,17 @@ def editedeventrequests(request):
             events.append(editevent)
     return render(request,"moderator/edited_event_requests.html",{'events':events})
 
+@login_required
 def showchanges(request,eventid):
     return render(request,"moderator/show_edited_event.html",{'event':EditEvent.objects.get(event_id = eventid)})
 
+@login_required
 def pending(request):
 	moderatorid=request.user.id;
 	pendingobj=Event.objects.all().filter(assigned_mod_id=moderatorid,verified = 0 )
 	return render(request,"moderator/pendingrequests.html",{'events':pendingobj})
 
+@login_required
 def action(request,eventid,decision):
 	if	decision=="accept":
 		eventobj=Event.objects.all().get(pk=eventid)
@@ -54,6 +65,7 @@ def action(request,eventid,decision):
 		return render(request,"moderator/decision.html",{'option':"rejected"})
 	
 
+@login_required
 def changeevent(request,eventid,action):
     try:
         EditEvent.objects.get(event_id = eventid)

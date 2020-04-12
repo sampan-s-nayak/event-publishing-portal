@@ -1,12 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base_center.html' %}
 
 {% block title %}additional info{% endblock %}
 
 {% block content %}
-  <h2>additional info</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">submit</button>
-  </form>
+<div class="card login">
+  <h2 class="card-header">Additional Info</h2>
+  <div class="card-body">
+      <div class="container">
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-sm btn-primary">submit</button>
+        </form>
+      </div>
+    </div>
+</div>
 {% endblock %}

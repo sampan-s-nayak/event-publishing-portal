@@ -1,8 +1,8 @@
-{%extends 'base.html'%}
+{%extends 'base_center.html'%}
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
+<!-- {% if user.is_authenticated %}
   Hi {{ user.username }}!
 
   <p><a href="user/create_event">User</a> </p>
@@ -14,7 +14,7 @@
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>
   <a href="{% url 'signup' %}">signup</a>
-{% endif %}
+{% endif %} -->
 <form action="" method="GET">
     {% csrf_token %}
     {{ form }}

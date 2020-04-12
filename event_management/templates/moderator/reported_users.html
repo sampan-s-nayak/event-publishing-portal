@@ -1,7 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'base_center.html' %}
 
 {% block title %}view reported users{% endblock %}
-
 {% block content %}
 <div id="accordion">
 {% for complaint in complaints  %}
@@ -19,7 +18,7 @@
       <div id="collapse{{complaint.id}}" class="collapse" aria-labelledby="heading{{complaint.id}}" data-parent="#accordion">
         <div class="card-body">
           <p>{{complaint.reason}}</p>
-          <a href="{% url 'blacklist' complaint.user.id duration %}" class="btn btn-danger btn-sm" > blacklist</a>
+          <a href="{% url 'moderator:blacklist' complaint.user.id duration %}" class="btn btn-danger btn-sm"> blacklist</a>
         </div>
       </div>
 {% endfor %}

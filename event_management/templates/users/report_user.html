@@ -1,12 +1,20 @@
-{% extends 'base.html' %}
+{% extends 'base_center.html' %}
 
 {% block title %}report users{% endblock %}
 
 {% block content %}
-  <h2>Report {{ user.first_name}} {{user.last_name}}</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">report</button>
-  </form>
+  <div class="card">
+    <div class="card-body">
+      <div class="container">
+        <div class="alert alert-warning" role="alert">
+          <p>Report {{ user.first_name}} {{user.last_name}}</p>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-danger btn-sm" type="submit">report</button>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}

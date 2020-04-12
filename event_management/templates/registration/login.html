@@ -1,13 +1,25 @@
-{% extends 'base.html' %}
+{% extends 'base_center.html' %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
-<p><a href={% url 'password_reset' %}>forgot password</a></p>
+<div class="card login">
+  <div class="card-body">
+      <div class="container">
+        <div class="justify-content-center">
+          <h2>Login</h2>
+          <form method="post">
+            <div >
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button class="btn btn-primary btn-sm  justify-content-start" type="submit">Login</button>
+            </div>
+        </form>
+        </div>
+      </div>
+      <div class="container">
+        <p><a href={% url 'password_reset' %}>forgot password</a>, dont have an account? <a href={% url 'signup' %}>signup</a></p>
+      </div>
+  </div>
+</div>
 {% endblock %}

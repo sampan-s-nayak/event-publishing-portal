@@ -1,12 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'base_center.html' %}
 
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">next</button>
-  </form>
+<div class="card login">
+  <h4 class="card-header" style="text-align: center;">Sign Up</h4>
+  <div class="card-body">
+    <div class="container">
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="container" style="text-align: right;">
+              <div>
+                <button class="btn btn-primary btn-md" type="submit">next</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}

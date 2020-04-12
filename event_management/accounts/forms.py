@@ -6,12 +6,12 @@ from django.forms import ModelForm
 from common.models import UserData
 
 class User_creation_form(forms.Form):
-    first_name = forms.CharField(label='Enter First Name',min_length=1,max_length=150)
-    last_name = forms.CharField(label='Enter Last Name',min_length=1,max_length=150)
-    username = forms.CharField(label='Enter Username', min_length=4, max_length=150)
-    email = forms.EmailField(label='Enter email')
-    password1 = forms.CharField(label='Enter password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+    first_name = forms.CharField(label='Enter First Name',min_length=1,max_length=150,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(label='Enter Last Name',min_length=1,max_length=150,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label='Enter Username', min_length=4, max_length=150,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label='Enter email',widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label='Enter password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
  
     def clean_username(self):
         username = self.cleaned_data['username'].lower()
@@ -53,4 +53,5 @@ class Signup_form(ModelForm):
         fields = ['dob','ph_no']
         widgets = {
         'dob': forms.DateInput(format=('%d/%m/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+        'ph_no':forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
     }
