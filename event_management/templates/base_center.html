@@ -21,7 +21,6 @@
 				<li class="nav-item" ><a class="nav-link" href="/">Home</a></li>
 				{%if user.is_authenticated and user.is_staff or user.is_superuser %}
 						<li class="nav-item" ><a class="nav-link" href="{%url 'moderator:view_reported_users'%}">view reported users</a></li>  
-						<li class="nav-item" ><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
 				{%elif user.is_authenticated%}
 						
 				{%endif%}
