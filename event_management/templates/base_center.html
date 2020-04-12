@@ -18,7 +18,6 @@
 	
 		<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto ">
-				<li class="nav-item" ><a class="nav-link" href="/">Home</a></li>
 				{%if user.is_authenticated and user.is_staff or user.is_superuser %}
 						<li class="nav-item" ><a class="nav-link" href="{%url 'moderator:view_reported_users'%}">view reported users</a></li>  
 				{%elif user.is_authenticated%}
