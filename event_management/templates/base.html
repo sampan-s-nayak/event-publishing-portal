@@ -23,7 +23,7 @@
 						<li class="nav-item" ><a class="nav-link" href="{%url 'moderator:view_reported_users'%}">view reported users</a></li>  
 						<li class="nav-item" ><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
 				{%elif user.is_authenticated%}
-						<li class="nav-item" ><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+						<li class="nav-item" ><a class="nav-link" href="{% url 'user:report_user' %}">Report a User</a></li>
 				{%endif%}
 			</ul>
 			{%if user.is_authenticated%}
