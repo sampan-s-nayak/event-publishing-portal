@@ -1,74 +1,10 @@
-<html>
-<head>
-    <title>Events</title>
-    <style>
-        ul
-		{
-			color: white;
-			list-style-type: none;
-			padding: 0;
-			background-color: #333333;
-			overflow: hidden;
-            border-radius: 10px;
-		}
-		li
-        {
-            border-radius: 5px;
-            margin-left:3px;
-            border: 3px solid #333333;
-            float: left;
-        }
-		li a
-		{
-            display: block;
-			text-decoration: none;
-			padding: 10px;
-			text-align: center;	
-			color: white;
-		}
-		li a:hover
-		{
-            border-radius: 5px;
-            background-color: #808080;
-		}
-        #display
-        {
-            border: 3px solid green;
-        }
+{%extends 'base_center.html'%} 
+{%block content%}
+{% if user.is_authenticated %}
+ 
 
-		#log_out
-		{
-			float: right;
-		}
-        table
-        {
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-        }
-        td,th
-        {
-            padding: 8px;
-            border:1px solid #dddddd;
-        }
-    </style>    
-</head>    
-<body>
-    {% if user.is_authenticated %}
-    <div id=nav_bar>
-        <ul>
-           <li > <a href="create_event"> <b> Create Event </b> </a> </li>
-           <li id=display> <a href="display_events"> <b> All Events </b> </a> </li>
-           <li> <a href="hosted_events"> <b> Hosted Events </b> </a> </li>
-           
-           <li id="log_out";> <a href="{% url 'logout' %}"> <b>Log Out {{user.username}}</b> </a> </li>
-           
-       </ul>
-   </div>
-   <div id=table>
-    <table>
+<table class="table table-hover table-striped table-bordered" >
+        <thead class="thead-dark">
         <tr>
             <th>Host </th>
             <th>Event Name</th>
@@ -79,7 +15,7 @@
             <th>Num Participants</th>
             <th>Max Waiting List</th>
             <th>Num Waiting List</th>
-        </tr>
+        </tr></thead>
     {% for ky in key %}
     <tr>
         <td> {{ ky.owner}} </td>
@@ -94,10 +30,7 @@
     </tr>   
     {% endfor %}
     </table>    
-</div>
-
-</body>
 {% else %}
     <h1> Authentication Failed, Get lost!! </h1>
 {% endif %}    
-</html>
+{%endblock%}

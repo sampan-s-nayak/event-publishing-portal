@@ -1,122 +1,33 @@
-<html>
-    <head>
-        <title> Home </title>
-    <style>
-        ul
-		{
-			color: white;
-			list-style-type: none;
-			padding: 0px;
-			background-color: #333333;
-			overflow: hidden;
-            border-radius: 10px;
-		}
-		li
-        {
-            border-radius: 5px;
-            margin-left:3px;
-            border: 3px solid #333333;
-            float: left;
-        }
-		li a
-		{
-			display: block;
-			text-decoration: none;
-			padding: 10px;
-			text-align: center;	
-			color: white;
-		}
-		li a:hover
-		{
-            border-radius: 5px;
-            background-color: #808080;
-		}
-        #create
-        {
-            border: 3px solid green;
-        }
-		
-		#log_out
-		{
-			float: right;
-		}
-   
-        #form
-        {
-            margin-left: 20%;
-        }
-        input
-        {
-            margin-top: 2px;
-            margin-bottom: 3px;
-            width: 40%;
-            border-radius: 5px;
-            border: solid 1.5px #D3D3D3;
-            padding: 9px;
-        }
-        input[type=text]:focus,input[type=number]:focus 
-		{
- 			 box-shadow: 0 0 5pt 2pt #D3D3D3;
-  			 outline-width: 0px;
-		}
-        #button
-        {
-            font-size: 100%;
-            font-weight: bold;
-            margin-top: 1%;
-            margin-left: 30%;
-            width: 10%;
-        }
-        #button:hover
-		{
-			background-color:white;
-			font-style: none;
-			font-weight: bold;
-			font-size: 110%;
-			color: black;
-
-		}
-    </style>
-    
-    </head>
-    <body>
-        {% if user.is_authenticated %}
+    {%extends 'base_center.html'%} 
+    {%block content%}
+            {% if user.is_authenticated %}
         
-        <div id=nav_bar>
-            <ul>
-               <li id=create> <a href="create_event"> <b> Create Event </b> </a> </li>
-               <li> <a href="display_events"> <b> All Events </b> </a> </li>
-               <li> <a href="hosted_events"> <b> Hosted Events </b> </a> </li>
-               <li id="log_out";> <a href="{% url 'logout' %}"> <b>Log Out {{user.username}} </b> </a> </li>
-               
-           </ul>
-       </div>
-       
-        <div id=form>
+         <div class="container">
         <form action = 'add_event' method = "POST">  
             {% csrf_token %}
             <label> Event Name: </label> <br> 
-            <input type = "text" name  = "Name" /><br>
+            <input type = "text" class="form-control" name  = "Name" required/><br>
             <label> Event Description: </label> <br> 
-            <input type = "text" name  = "Desc" /><br>  
+            <input type = "text" class="form-control" name  = "Desc" required/><br>  
             <label> Start Date: </label> <br> 
-            <input type = "text" name  = "Start_Date" /><br>
+            <input type = "text" class="form-control" name  = "Start_Date" required/><br>
             <label>  End Date: </label> <br> 
-            <input type = "text" name  = "End_Date" /><br>
+            <input type = "text" class="form-control" name  = "End_Date" required/><br>
             <label> Max Participants: </label> <br> 
-            <input type = "number" name  = "Max" /><br>
+            <input type = "number" class="form-control" name  = "Max" required/><br>
             <label> Num Participants: </label> <br> 
-            <input type = "number" name  = "Num" /><br>
+            <input type = "number" class="form-control" name  = "Num" required/><br>
             <label> Max Waiting List Size: </label> <br> 
-            <input type = "number" name  = "Max_List" /><br>
+            <input type = "number" class="form-control" name  = "Max_List" required/><br>
             <label> Num Waiting List: </label> <br> 
-            <input type = "number" name  = "Num_List" /><br>
-              
-            <input id=button type="submit">  
+            <input type = "number" class="form-control" name  = "Num_List" required/><br>
+            
+            <input class="btn btn-primary btn-md" style="float: right" type="submit">  
+            
         </form>  
         </div>  
-    </body>
+    
     {% else %}
         <h1> Authentication Failed, Get lost!! </h1>
     {% endif %}    
-</html>
+    {%endblock%}

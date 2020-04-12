@@ -20,8 +20,13 @@
 			<ul class="navbar-nav mr-auto ">
 				{%if user.is_authenticated and user.is_staff or user.is_superuser %}
 						<li class="nav-item" ><a class="nav-link" href="{%url 'moderator:view_reported_users'%}">view reported users</a></li>  
-				{%elif user.is_authenticated%}
+						<li class="nav-item" ><a class="nav-link" href="{%url 'superuser:home'%}">Add Moderator</a></li> 
+						<li class="nav-item" ><a class="nav-link" href="{%url 'superuser:display'%}">All Moderators</a></li>  
 						
+				{%elif user.is_authenticated%}
+						<li class="nav-item" ><a class="nav-link" href="{%url 'users:create_event'%}">Create event</a></li>
+						<li class="nav-item" ><a class="nav-link" href="{%url 'users:display_events'%}">All events</a></li>
+						<li class="nav-item" ><a class="nav-link" href="{%url 'users:hosted_events'%}">Hosted events</a></li>
 				{%endif%}
 			</ul>
 			{%if user.is_authenticated%}
