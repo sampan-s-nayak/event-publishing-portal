@@ -1,8 +1,7 @@
-{%extends 'base_center.html'%} 
+{%extends 'base.html'%} 
 {%block content%}
 {% if user.is_authenticated %}
- 
-
+<div class="container">
 <table class="table table-hover table-striped table-bordered" >
         <thead class="thead-dark">
         <tr>
@@ -29,7 +28,7 @@
         <th> {{ky.num_in_waiting_list }} </th>
     </tr>   
     {% endfor %}
-    </table>    
+    </table>    </div>
 {% else %}
     <h1> Authentication Failed, Get lost!! </h1>
 {% endif %}    

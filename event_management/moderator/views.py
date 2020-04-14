@@ -22,18 +22,17 @@ def blacklist_user(request,id,duration):
 @login_required
 def view_reported_users(request):
     user = request.user
-    if(not user.is_staff or not user.is_superuser):
-        return HttpResponse("you are not authorized to view this page") 
+    if(user.is_staff or user.is_superuser):
+        template_path = 'moderator/reported_users.html'
+        reported_users = ReportedUsers.objects.all()
 
-    template_path = 'moderator/reported_users.html'
-    reported_users = ReportedUsers.objects.all()
-
-    context = {
+        context = {
         'complaints': reported_users,
         'duration': BLACKLIST_DURATION,
-    }
-    return render(request, template_path,context)
-
+        }
+        return render(request, template_path,context)
+    else:
+        return HttpResponse("you are not authorized to view this page")
 @login_required
 def editedeventrequests(request):
     events = []

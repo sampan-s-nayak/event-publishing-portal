@@ -2,28 +2,29 @@
 {%block content%}
     {% if user.is_authenticated %}
     
-
-        <form action = 'add_mod' method = "POST">  
+    <form action = 'add_mod' method = "POST">  
             {% csrf_token %}
-            <label> Username: </label> <br> 
-            <input type = "text" class="form-control" name  = "username" required/><br>
-           
-            <label> Password: </label> <br> 
-            <input type = "password" class="form-control" name  = "password" required/><br>  
+            
+            <label class="mt-0"> Username: </label> <br> 
+            <input type = "text" class="form-control form-control-sm" name  = "username" required/><br>
+            
+            <label class="p-0"> Password: </label> <br> 
+            <input type = "password" class="form-control form-control-sm" name  = "password" required/><br>  
            
             <label> Confirm Password: </label> <br> 
-            <input type = "password" class="form-control" name  = "cpassword" required/><br>
+            <input type = "password" class="form-control form-control-sm" name  = "cpassword" required/><br>
            
             <label>  First Name: </label> <br> 
-            <input type = "text" class="form-control" name  = "fname" required/><br>
+            <input type = "text" class="form-control form-control-sm" name  = "fname" required/><br>
            
             <label>  Last Name: </label> <br> 
-            <input type = "text" class="form-control" name  = "lname" required/><br>
-           
+            <input type = "text" class="form-control form-control-sm" name  = "lname" required/><br>
+             
             <label> Email: </label> <br> 
-            <input type = "text" class="form-control" name  = "email" required/><br>
+            <input type = "text" class="form-control form-control-sm" name  = "email" required/><br>
               
-            <input class="btn btn-primary btn-md" style="float: right" id=button type="submit">  
+            <input class="btn btn-primary btn-sm" style="float: right" id=button type="submit">  
+                
         </form>
         {% for message in messages %}
             <h1>{{message}}</h1>

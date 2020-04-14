@@ -19,10 +19,8 @@ def add_event(request):
     Start_date = request.POST['Start_Date']
     End_date = request.POST['End_Date']
     Max_part = request.POST['Max']
-    Num_part = request.POST['Num']
     Max_list = request.POST['Max_List']
-    Num_list = request.POST['Num_List']
-    event = eventmod.Event(owner=current_user,event_name=Event_name,event_description=Event_desc, event_start_date=Start_date,event_end_date=End_date, max_participants=Max_part,num_participants=Num_part, max_waiting_list_size=Max_list,num_in_waiting_list=Num_list)
+    event = eventmod.Event(owner=current_user,event_name=Event_name,event_description=Event_desc, event_start_date=Start_date,event_end_date=End_date, max_participants=Max_part, max_waiting_list_size=Max_list)
     event.save()
     return render(request,'users/create_event.html')    
 

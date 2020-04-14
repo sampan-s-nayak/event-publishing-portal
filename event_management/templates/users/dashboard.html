@@ -3,7 +3,7 @@
         User Dashboard for {{user.get_username}}
         <a class="btn btn-primary btn-sm" href="/user/createdevents" >See all created events</a>
         <a class="btn btn-primary btn-sm" href="/user/joinedevents" >See all joined events</a>
-        {%if is_mod%}
+        {%if user.is_staff or user.is_superuser%}
         <a class="btn btn-primary btn-sm" href="/moderator/pendingrequest">Event requests</a>	
         <a class="btn btn-primary btn-sm" href="/moderator/edited_event_requests" >Edit event requests</a>
         {%endif%}
