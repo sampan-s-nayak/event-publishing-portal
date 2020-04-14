@@ -42,13 +42,17 @@
 				
 				{%elif user.is_authenticated%}
 				<li class="nav-item" ><a class="nav-link" href="{%url 'users:create_event'%}">Create event</a></li>
-				<li class="nav-item" ><a class="nav-link" href="{%url 'users:hosted_events'%}">Hosted events</a></li>
+				
 				{%endif%}
 			</ul>
-			{%if user.is_authenticated%}
-			<a href="{%url 'logout'%}" class="btn btn-dark"><b>{{user.get_username}}</b> <i style="margin-left:4px;" class="fas fa-sign-out-alt"></i></a>
+			{%if user.is_authenticated and user.is_superuser %}
+			<a href="{%url 'logout'%}" class="btn btn-dark"> <i style="margin-left:4px;" class="fas fa-crown fa-lg"></i> <b style="font-size: 18px;"> {{user.get_username}} </b><i style="margin-left:4px;" class="fas fa-sign-out-alt fa-lg"></i></a>
+			{%elif user.is_authenticated and user.is_staff %}
+			<a href="{%url 'logout'%}" class="btn btn-dark"> <i style="margin-left:4px;" class="fas fa-user-shield fa-lg"></i> <b style="font-size: 18px;" > {{user.get_username}} </b><i style="margin-left:4px;" class="fas fa-sign-out-alt fa-lg"></i></a>
+			{%elif user.is_authenticated%}
+			<a href="{%url 'logout'%}" class="btn btn-dark"> <i style="margin-left:4px;" class="fas fa-user fa-lg"></i> <b style="font-size: 18px;"> {{user.get_username}} </b><i style="margin-left:4px;" class="fas fa-sign-out-alt fa-lg"></i></a>
 			{%else%}
-			<a href="{%url 'login'%}" class="btn btn-dark">Login<i style="margin-left:4px ;" class="fas fa-sign-in-alt"></i></a>
+			<a href="{%url 'login'%}" class="btn btn-dark"><i style="margin-left:4px;" class="fas fa-sign-in-alt fa-lg"></i></a>
 			{%endif%}			
 		</div>
 	</nav>

@@ -19,8 +19,10 @@
         	<div id="buttons">
         	<a class="btn btn-primary " href="{%url 'event:eventdetails' event.id %}" >Details</a>
             <a class="btn btn-primary " href="{%url 'moderator:action' event.id 'accept'%}" >Accept</a>
-            <a class="btn btn-primary " href="{%url 'moderator:action' event.id 'reject'%}" >reject</a></div>
-        {%endfor%} 
+            <a class="btn btn-primary " href="{%url 'moderator:action' event.id 'reject'%}" >reject</a>
+			</div>	
+		</div>
+		{%endfor%} 
         {%else%}
         <p>There are no events to diplay</p>
         {%endif%} 
