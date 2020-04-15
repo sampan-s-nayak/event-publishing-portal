@@ -1,19 +1,19 @@
 {%extends 'base.html'%}
 {%block content%}
-	<style>
+<!--	<style>
 		.card{
-			margin: 5px;
+			margin: 3px;
 		}
 		.btn{
 			margin:5px;
 			display: inline-block;
 		}
-		
+	-->	
 		
 	</style>
         {%if events%}
         {%for event in events%}
-        <div class="card col-4">
+        <div class="card col-4 p-3">
         	<p>Event id : {{event.id}}</p>
         	<p>Event Name : {{event.event_name}}</p>
         	<div id="buttons">

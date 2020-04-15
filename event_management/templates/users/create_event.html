@@ -22,7 +22,8 @@
             
         </form>  
         </div>  
-    
+        {% if msg %}  <script>alert("Assigned Moderator: {{ msg }}")</script> {% endif %}
+
     {% else %}
         <h1> Authentication Failed, Get lost!! </h1>
     {% endif %}    

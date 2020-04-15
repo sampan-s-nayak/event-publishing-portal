@@ -45,10 +45,6 @@
 				  <li class="nav-item" ><a class="nav-link" href="{%url 'users:create_event'%}">Create event</a></li>
 				{%endif%}
 
-
-
-
-		
 			</ul>
 			{%if user.is_authenticated and user.is_superuser %}
 			<a href="{%url 'logout'%}" class="btn btn-dark"> <i style="margin-left:4px;" class="fas fa-crown fa-lg"></i> <b style="font-size: 18px;"> {{user.get_username}} </b><i style="margin-left:4px;" class="fas fa-sign-out-alt fa-lg"></i></a>

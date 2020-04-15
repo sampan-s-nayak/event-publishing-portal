@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+import random
 from .models import ReportedUsers
 from event import models as eventmod
 from django.contrib.auth.models import User
@@ -20,9 +21,18 @@ def add_event(request):
     End_date = request.POST['End_Date']
     Max_part = request.POST['Max']
     Max_list = request.POST['Max_List']
-    event = eventmod.Event(owner=current_user,event_name=Event_name,event_description=Event_desc, event_start_date=Start_date,event_end_date=End_date, max_participants=Max_part, max_waiting_list_size=Max_list)
+    
+    all_mods = User.objects.filter(is_staff=True)
+    array = []
+    index = 0
+    for mod in all_mods:
+        array.insert(index,mod)
+        index+=1
+    ind = random.randrange(0,index)
+
+    event = eventmod.Event(owner=current_user,event_name=Event_name,event_description=Event_desc, event_start_date=Start_date,event_end_date=End_date, max_participants=Max_part, max_waiting_list_size=Max_list, assigned_mod=array[ind])
     event.save()
-    return render(request,'users/create_event.html')    
+    return render(request,'users/create_event.html',{'msg':array[ind]})    
 
 @login_required
 def display_events(request):
