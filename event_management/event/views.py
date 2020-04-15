@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect
-from datetime import datetime,date
+from datetime import datetime,date,timedelta
 from .models import *
 from django.db.models import F
 from .forms import EditEventForm
 from django.contrib.auth.decorators import login_required
 from moderator import models as modmod
+import datetime as dt
+from django.utils import timezone
 
 
 # Create your views here.
@@ -23,11 +25,12 @@ def eventregister(request,regeventid):
 	eventobj = Event.objects.all().filter(pk = regeventid)
 	if modmod.BlackList.objects.filter(user=request.user).exists():
 		blacklistobj = modmod.BlackList.objects.get(user=request.user)
-		if date.today()-blacklistobj.added_time>blacklistobj.duration:
+		#return render(request,"event/oops.html",{'reason':str(blacklistobj.added_time+timedelta(days=blacklistobj.duration)) + "  andddddddddddd  " + str(timezone.now())})
+		if blacklistobj.added_time+timedelta(days=blacklistobj.duration)<timezone.now():
 			blacklistobj.delete()
 		else:
-			return render(request,"event/oops.html",{'reason':'You have been blacklisted for another ' + str(blacklistobj.duration-date.today()-blacklistobj.added_time) + 'days'})
-	if Registration.objects.filter(participant = request.user).exists():
+			return render(request,"event/oops.html",{'reason':'You have been blacklisted till ' + str(blacklistobj.added_time+timedelta(days=blacklistobj.duration))})
+	if Registration.objects.filter(participant = request.user,event=eventobj.first()).exists():
 		return render(request,"event/oops.html",{'reason':'You have already registered for the event'})
 	
 

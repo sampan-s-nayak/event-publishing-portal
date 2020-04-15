@@ -17,6 +17,7 @@ def blacklist_user(request,id,duration):
     user = User.objects.get(id=id)
     if(not BlackList.objects.filter(user=user).exists()):
         bl = BlackList.objects.create(user=user,duration=duration)
+        
     return redirect('moderator:view_reported_users')
 
 @login_required

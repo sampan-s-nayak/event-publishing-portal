@@ -20,6 +20,8 @@
         {%for event in joinedevents%}
         <div class="card">
             <div class="card-body">
+            {{event.event_name}}
+            <br/>
             <a class="btn btn-primary btn-sm" href="{%url 'event:eventdetails' event.id%}" >See details</a>
             </div>
         </div>
