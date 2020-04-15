@@ -1,9 +1,23 @@
 {%extends 'base.html'%}
+
 {%block content%}
+<style>
+    .card,.card-body{
+        padding:10px;
+    }
+</style>
         {%if events%}
+        <div class="container-fluid">
         {%for event in events%}
-            <a class="btn btn-primary btn-sm" href="{%url 'moderator:showchanges' event.event.id%}" >{{event.event.event_name}}</a>
+        {% if forloop.first %}<div class="row">{% endif %}
+            <div class="col-md">
+            <a class="btn btn-primary btn-block" href="{%url 'moderator:showchanges' event.event.id%}" >{{event.event.event_name}}</a>
+        </div>
+            {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+                {% if forloop.last %}</div>{% endif %}
+                <hr/>
         {%endfor%} 
+    </div>
         {%else%}
         <p>There are no events to diplay</p>
         {%endif%}   

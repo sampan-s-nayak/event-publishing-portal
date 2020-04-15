@@ -1,18 +1,28 @@
 {%extends 'base.html'%}
 {%block content%}
+<style>
+    .card,.card-body{
+        padding:10px;
+    }
+</style>
+    <p>Click on a user to report</p>
     {%if registrationlist%}
-        <ol>
+    <div class="container-fluid">
         {%for registration in registrationlist%}
-        <li>
-            <div>
-                {{registration.participant.username}}
-                <a class="btn btn-primary btn-sm" href="{%url 'users:report_user' registration.participant.id%}" >Report user</a>
-            </div>
-        </li>
+        {% if forloop.first %}<div class="row">{% endif %}
+              <div class="col-md">
+                    <a class="btn btn-primary btn-block" href="{%url 'users:report_user' registration.participant.id%}" >{{registration.participant.username}}</a>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+                    {% if forloop.last %}</div>{% endif %}
+            <hr/>
         {%endfor%}
-        </ol>
+        <p class="text-center">That's all folks</p>
+    </div>
     {%else%}
         <p>No participants yet for the event</p>
     {%endif%}
 		
 {%endblock%}
+
+

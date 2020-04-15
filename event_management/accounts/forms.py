@@ -53,5 +53,5 @@ class Signup_form(ModelForm):
         fields = ['dob','ph_no']
         widgets = {
         'dob': forms.DateInput(format=('%d/%m/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
-        'ph_no':forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+        'ph_no':forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Enter your phone number'}),
     }

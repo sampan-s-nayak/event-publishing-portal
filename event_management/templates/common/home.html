@@ -2,24 +2,17 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<!-- {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-
-  <p><a href="user/create_event">User</a> </p>
-  <p><a href="user/dashboard">Dashboard</a></p>
-  <p><a href="superuser/home">Superuser</a></p>
-  <p><a href="{% url 'logout' %}">logout</a></p>
-
-  {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a>
-  <a href="{% url 'signup' %}">signup</a>
-{% endif %} -->
-<form action="" method="GET">
+<style>
+#searchform{
+  text-align:center;
+}
+</style>
+<form action="" method="GET" id="searchform">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="Submit">
+    <input type="submit" class="btn btn-dark center" value="Submit">
 </form>
+<hr/>
 {% for eachevent in eventlist %}
     <div class="card mb-3">
 		<div class="card-body">

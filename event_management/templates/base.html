@@ -19,31 +19,36 @@
 	
 		<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto ">
+				
 				{%if user.is_authenticated%}
+					{%if user.is_staff%}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Moderator Dashboard</a>
+						<div class="dropdown-menu bg-dark">
+						  <a class="dropdown-item bg-dark text-white" href="{%url 'moderator:pending'%}">Requested events</a>
+						  <a class="dropdown-item bg-dark text-white" href="{%url 'moderator:editedeventrequests'%}">Event modification requests</a> 
+						  <a class="dropdown-item bg-dark text-white" href="{%url 'moderator:view_reported_users'%}">View reported users</a>
+						  {%if user.is_superuser%}
+						  <a class="dropdown-item bg-dark text-white" href="{%url 'superuser:home'%}">Add moderator</a>
+						  <a class="dropdown-item bg-dark text-white" href="{%url 'superuser:display'%}">All moderators</a>
+						  {%endif%}
+						</div>
+					  </li>
+					{%endif%}
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Dashboard</a>
+					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">User Dashboard</a>
 					<div class="dropdown-menu bg-dark">
 					  <a class="dropdown-item bg-dark text-white" href="{%url 'users:createdevents'%}">All Created events</a>
-					  <a class="dropdown-item bg-dark text-white" href="{%url 'users:joinedevents'%}">All Joined events</a>
-					  {%if user.is_staff or user.is_superuser%}	
-					  <a class="dropdown-item bg-dark text-white" href="{%url 'moderator:pending'%}">Requested events</a>
-					  <a class="dropdown-item bg-dark text-white" href="{%url 'moderator:editedeventrequests'%}">Edit event</a>
-					  {%endif%}
+					  <a class="dropdown-item bg-dark text-white" href="{%url 'users:joinedevents'%}">All Joined events</a> 
 					</div>
 				  </li>
+				  <li class="nav-item" ><a class="nav-link" href="{%url 'users:create_event'%}">Create event</a></li>
 				{%endif%}
-				{%if user.is_authenticated and user.is_superuser %}
-				<li class="nav-item" ><a class="nav-link" href="{%url 'superuser:home'%}">Add Moderator</a></li> 
-				<li class="nav-item" ><a class="nav-link" href="{%url 'superuser:display'%}">All Moderators</a></li>
-				{%endif%}		
-				
-				{%if user.is_authenticated and user.is_staff or user.is_superuser %}
-				<li class="nav-item" ><a class="nav-link" href="{%url 'moderator:view_reported_users'%}">View reported users</a></li>  
-				
-				{%elif user.is_authenticated%}
-				<li class="nav-item" ><a class="nav-link" href="{%url 'users:create_event'%}">Create event</a></li>
-				
-				{%endif%}
+
+
+
+
+		
 			</ul>
 			{%if user.is_authenticated and user.is_superuser %}
 			<a href="{%url 'logout'%}" class="btn btn-dark"> <i style="margin-left:4px;" class="fas fa-crown fa-lg"></i> <b style="font-size: 18px;"> {{user.get_username}} </b><i style="margin-left:4px;" class="fas fa-sign-out-alt fa-lg"></i></a>
